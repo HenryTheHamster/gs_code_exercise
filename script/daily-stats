@@ -13,8 +13,8 @@ def format_midnight(midnight)
   midnight.strftime("%Y-%m-%d")
 end
 
-output << %w(date min_rrp max_rrp average_rrp)
+output << %w(date min_rrp max_rrp average_rrp median std_dev variance)
 
-stats.each do |midnight, min, max, average|
-  output << [format_midnight(midnight), min, max, average]
+stats.each do |midnight, min, max, average, median, std_dev, variance|
+  output << [format_midnight(midnight), min, max, average, median, std_dev, variance]
 end

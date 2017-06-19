@@ -38,7 +38,7 @@ class DailyStats
     midnight = @time_series.first_timestamp - 30 * 60
 
     while midnight < @time_series.last_timestamp
-      yield midnight, *min_max_avg(midnight)
+      yield midnight, *min_max_avg(midnight), median(midnight), std_dev(midnight), variance(midnight)
       midnight += 24 * 60 * 60
     end
   end
