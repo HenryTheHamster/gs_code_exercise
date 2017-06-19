@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+# Copyright (c) 2015 GreenSync Pty Ltd.  All rights reserved.
+
+require_relative '../lib/init'
+
+loader = DataLoader.new
+vic1_rrp = loader.load_series
+stats = DailyStats.new(vic1_rrp)
+
+output = CSV.new(STDOUT)
+
+def format_midnight(midnight)
+  midnight.strftime("%Y-%m-%d")
+end
+
+output << %w(date min_rrp max_rrp average_rrp)
+
+stats.each do |midnight, min, max, average|
+  output << [format_midnight(midnight), min, max, average]
+end
